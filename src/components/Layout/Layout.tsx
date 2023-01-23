@@ -1,15 +1,26 @@
 import React, { PropsWithChildren } from 'react';
-import { Global, ThemeProvider } from '@emotion/react';
 
-import { globalStyles } from 'styles/globalStyles';
-import { theme } from 'styles/theme';
+import { Typography } from 'components/@common/Typography';
+import * as Styled from './Layout.styles';
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <ThemeProvider theme={theme}>
-      <Global styles={globalStyles} />
-      {children}
-    </ThemeProvider>
+    <Styled.Wrapper>
+      <Styled.HeaderWrapper>
+        <Styled.HeaderContent>
+          <Typography variant="h1" color="primary">
+            MISO :-)
+          </Typography>
+          <Styled.Nav>
+            <Typography variant="body1">ABOUT</Typography>
+            <Typography variant="body1">COLOR</Typography>
+            <Typography variant="body1">SNIPPETS</Typography>
+          </Styled.Nav>
+        </Styled.HeaderContent>
+      </Styled.HeaderWrapper>
+
+      <Styled.Main>{children}</Styled.Main>
+    </Styled.Wrapper>
   );
 };
 
