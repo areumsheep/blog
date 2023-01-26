@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HeadFC } from 'gatsby';
+import { graphql, HeadFC, PageProps } from 'gatsby';
 import styled from '@emotion/styled';
 
 import App from 'App';
@@ -7,10 +7,17 @@ import { Layout } from 'components/Layout';
 import { Callout } from 'components/@common/Callout';
 import Seo from '../components/Seo';
 import { Typography } from 'components/@common/Typography';
+import type { ContentType } from 'types/content';
 
 import MisoCharacter from 'images/miso.jpeg';
 
-const IndexPage = () => {
+interface Response {
+  allMdx: {
+    nodes: ContentType[];
+  };
+}
+
+const IndexPage = ({ data }: PageProps<Response>) => {
   return (
     <App>
       <Layout>
@@ -39,6 +46,28 @@ const IndexPage = () => {
             </Callout.Description>
           </Callout>
         </Wrapper>
+        <Typography variant="h2" style={{ marginTop: '40px' }}>
+          All Posts
+        </Typography>
+        <div>
+          {data?.allMdx.nodes.map((node) => (
+            <a href={`/contents/${node.frontmatter.slug}`}>
+              <Article>
+                <Typography variant="h3" color="gray600">
+                  {node.frontmatter.title}
+                </Typography>
+                <Typography variant="body1" color="gray300">
+                  {node.frontmatter.description}
+                </Typography>
+                <Detail>
+                  <Typography variant="body2" color="livid300">
+                    {node.frontmatter.createdAt}
+                  </Typography>
+                </Detail>
+              </Article>
+            </a>
+          ))}
+        </div>
       </Layout>
     </App>
   );
@@ -47,6 +76,23 @@ const IndexPage = () => {
 export const Head: HeadFC = () => <Seo title="Miso :-)" />;
 
 export default IndexPage;
+
+export const query = graphql`
+  query {
+    allMdx(sort: { frontmatter: { createdAt: DESC } }) {
+      nodes {
+        frontmatter {
+          title
+          description
+          createdAt(formatString: "MMMM DD, YYYY")
+          slug
+        }
+        id
+        excerpt
+      }
+    }
+  }
+`;
 
 const Wrapper = styled.div`
   img {
@@ -64,4 +110,14 @@ const Flex = styled.div`
   display: flex;
   column-gap: 8px;
   margin-top: 10px;
+`;
+
+const Article = styled.article`
+  margin-top: 25px;
+`;
+
+const Detail = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 10px;
 `;
