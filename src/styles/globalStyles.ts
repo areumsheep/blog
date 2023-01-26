@@ -24,12 +24,9 @@ export const globalStyles = css`
     border: none;
   }
   a {
-    font-weight: 600;
     text-decoration: none;
-    color: inherit;
-    &:hover {
-      text-decoration: underline;
-    }
+    user-select: none;
+    cursor: pointer;
   }
   ol,
   ul,

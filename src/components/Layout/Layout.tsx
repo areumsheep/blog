@@ -8,13 +8,15 @@ const Layout = ({ children }: PropsWithChildren) => {
     <Styled.Wrapper>
       <Styled.HeaderWrapper>
         <Styled.HeaderContent>
-          <Typography variant="h1" color="primary">
-            MISO :-)
-          </Typography>
+          <a href="/">
+            <Typography variant="h1" color="primary">
+              MISO :-)
+            </Typography>
+          </a>
           <Styled.Nav>
-            <Typography variant="body1">ABOUT</Typography>
+            {/* <Typography variant="body1">ABOUT</Typography>
             <Typography variant="body1">COLOR</Typography>
-            <Typography variant="body1">SNIPPETS</Typography>
+            <Typography variant="body1">SNIPPETS</Typography> */}
           </Styled.Nav>
         </Styled.HeaderContent>
       </Styled.HeaderWrapper>
