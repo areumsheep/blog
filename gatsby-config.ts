@@ -40,6 +40,12 @@ const config: GatsbyConfig = {
         src: `${__dirname}/contents/gif/**/images`,
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-gtag',
+      options: {
+        trackingIds: ['G-FMSV8JQ26N'],
+      },
+    },
   ],
 };
 
