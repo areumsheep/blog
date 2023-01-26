@@ -28,9 +28,9 @@ export const globalStyles = css`
     user-select: none;
     cursor: pointer;
   }
-  ol,
+  /* ol,
   ul,
   li {
     list-style: none;
-  }
+  } */
 `;

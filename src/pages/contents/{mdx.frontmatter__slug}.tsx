@@ -4,13 +4,26 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import App from 'App';
 import { Layout } from 'components/Layout';
+import { Typography } from 'components/@common/Typography';
 import Seo from '../../components/Seo';
+import MdxContent from 'components/MdxContent';
+import type { ContentType } from 'types/content';
 
-const BlogPost = ({ data, children }: PageProps) => {
+interface Response {
+  mdx: ContentType;
+}
+
+const BlogPost = ({ data, children }: PageProps<Response>) => {
   const image = getImage((data as any).mdx.frontmatter.hero_image);
   return (
     <App>
-      <Layout>{children}</Layout>
+      <Layout>
+        <Typography variant="h2">{data.mdx.frontmatter.title}</Typography>
+        <Typography variant="body2" color="livid300">
+          {data.mdx.frontmatter.createdAt}
+        </Typography>
+        <MdxContent>{children}</MdxContent>
+      </Layout>
     </App>
   );
 };
@@ -26,6 +39,6 @@ export const query = graphql`
   }
 `;
 
-export const Head = () => <Seo title="cool blog posts" />;
+export const Head = () => <Seo title="브라우저 동작 원리" />;
 
 export default BlogPost;

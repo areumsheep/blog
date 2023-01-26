@@ -8,7 +8,6 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     'gatsby-plugin-root-import',
-    'gatsby-plugin-mdx',
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
@@ -18,6 +17,27 @@ const config: GatsbyConfig = {
       options: {
         name: 'contents',
         path: `${__dirname}/contents`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 800,
+              backgroundColor: 'none',
+            },
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-remark-interactive-gifs`,
+      options: {
+        root: `${__dirname}`,
+        src: `${__dirname}/contents/gif/**/images`,
       },
     },
   ],
