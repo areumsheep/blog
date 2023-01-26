@@ -1,17 +1,21 @@
+import { HeadFC } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 import * as React from 'react';
-import type { HeadFC, PageProps } from 'gatsby';
+import Layout from '../components/Layout';
+import Seo from '../components/Seo';
 
-import App from 'App';
-import { Layout } from 'components/Layout';
-
-const IndexPage: React.FC<PageProps> = () => {
+const IndexPage = () => {
   return (
-    <App>
-      <Layout>Content가 될 부분</Layout>
-    </App>
+    <Layout pageTitle="Home Page">
+      <p>I'm making this by following the Gatsby Tutorial.</p>
+      <StaticImage
+        alt="Clifford, a reddish-brown pitbull, posing on a couch and looking stoically at the camera"
+        src="../images/icon.png"
+      />
+    </Layout>
   );
 };
 
-export default IndexPage;
+export const Head: HeadFC = () => <Seo title="Home Page" />;
 
-export const Head: HeadFC = () => <title>MISO :-)</title>;
+export default IndexPage;
