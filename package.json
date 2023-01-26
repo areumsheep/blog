@@ -12,6 +12,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "restart": "gatsby clean && yarn run start",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

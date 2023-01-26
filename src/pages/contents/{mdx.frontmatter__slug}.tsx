@@ -2,17 +2,16 @@ import * as React from 'react';
 import { graphql, PageProps } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-import Layout from '../../components/Layout';
+import App from 'App';
+import { Layout } from 'components/Layout';
 import Seo from '../../components/Seo';
 
 const BlogPost = ({ data, children }: PageProps) => {
   const image = getImage((data as any).mdx.frontmatter.hero_image);
   return (
-    <Layout pageTitle="cool blog posts">
-      <p>{JSON.stringify((data as any).mdx)}</p>
-      {!!image && <GatsbyImage image={image} alt={(data as any).mdx.frontmatter.hero_image_alt} />}
-      {children}
-    </Layout>
+    <App>
+      <Layout>{children}</Layout>
+    </App>
   );
 };
 

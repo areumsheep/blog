@@ -7,26 +7,19 @@ const config: GatsbyConfig = {
   },
   graphqlTypegen: true,
   plugins: [
+    'gatsby-plugin-root-import',
     'gatsby-plugin-mdx',
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'blog',
-        path: `${__dirname}/contents`,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-emotion`,
-      options: {
-        sourceMap: true,
-        autoLabel: 'dev-only',
-        labelFormat: `[local]`,
-        cssPropOptimization: true,
-      },
-    },
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    `gatsby-plugin-emotion`,
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'contents',
+        path: `${__dirname}/contents`,
+      },
+    },
   ],
 };
 
