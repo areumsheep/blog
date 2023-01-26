@@ -25,11 +25,11 @@ const BlogPage = ({ data }: PageProps) => {
 
 export const query = graphql`
   query {
-    allMdx(sort: { frontmatter: { date: DESC } }) {
+    allMdx(sort: { frontmatter: { createdAt: DESC } }) {
       nodes {
         frontmatter {
           title
-          date(formatString: "MMMM DD, YYYY")
+          createdAt(formatString: "MMMM DD, YYYY")
           slug
         }
         id

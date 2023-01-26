@@ -7,7 +7,8 @@ export const Wrapper = styled.div`
 
 export const HeaderWrapper = styled.header`
   height: 70px;
-  /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+  border-bottom: 1px solid ${({ theme }) => theme.color['livid50']};
+  box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
 `;
 export const HeaderContent = styled.div`
   max-width: 680px;
