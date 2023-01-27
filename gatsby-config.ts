@@ -30,6 +30,13 @@ const config: GatsbyConfig = {
               backgroundColor: 'none',
             },
           },
+          {
+            resolve: 'gatsby-remark-copy-relative-linked-files',
+            options: {
+              ignoreFileExtensions: ['.md', '.pdf', '.d.ts'],
+              filename: ({ hash, name, extension }) => `${name}-${hash}.${extension}`,
+            },
+          },
         ],
       },
     },
