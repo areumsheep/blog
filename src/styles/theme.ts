@@ -25,7 +25,7 @@ export const theme = {
     blue700: '#084298',
     blue800: '#052C64',
     blue900: '#031A3D',
-    livid50: '#FAFAFA',
+    livid50: '#F6F6F6',
     livid100: '#EBECF0',
     livid200: '#CDD1E2',
     livid300: '#B1B7D3',
