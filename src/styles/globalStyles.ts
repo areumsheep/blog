@@ -28,9 +28,7 @@ export const globalStyles = css`
     user-select: none;
     cursor: pointer;
   }
-  /* ol,
-  ul,
-  li {
-    list-style: none;
-  } */
+  svg {
+    margin-right: 4px;
+  }
 `;

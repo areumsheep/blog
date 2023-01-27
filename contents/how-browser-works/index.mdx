@@ -10,7 +10,7 @@ updatedAt: ''
 <Callout>
 **Create Date**: 2023/01/20   
 **Update Date**: 2023/01/24
-         
+<br/>         
 [Life of a pixel](http://bit.ly/lifeofapixel), [웹 성능 최적화에 필요한 브라우저의 모든 것](https://tv.naver.com/v/4578425)을 보고 정리한 내용입니다.       
             
 [NAVER DEVIEW 2018 웹 성능 최적화에 필요한 브라우저의 모든 것 영상 요약](https://ssocoit.tistory.com/263), [Life of Pixel](https://tecoble.techcourse.co.kr/post/2022-09-26-life-of-pixel) 글을
@@ -34,7 +34,7 @@ updatedAt: ''
 
 Blink는 아래 사항을 포함합니다.
 
-- DOM, CSS, [Web IDL](https://webidl.spec.whatwg.org/)을 포함한 웹 플랫폼 사양(ex: [HTML standard](https://www.notion.so/a48f24437e9c46e783230ba97d14f5bf))을 구현합니다.
+- DOM, CSS, [Web IDL](https://webidl.spec.whatwg.org/)을 포함한 웹 플랫폼 사양(ex: [HTML standard](https://html.spec.whatwg.org/))을 구현합니다.
 - V8 엔진을 내장하고 있으며 JavaScript를 실행합니다.
 - 기본 네트워크 스택을 이용해 리소스를 요청합니다.
 - DOM 트리를 구축합니다.
@@ -53,8 +53,8 @@ Blink는 아래 사항을 포함합니다.
 
 # 0) 브라우저에서 시작하기
 
-해당 부분은 [Chrome의 내부 동작 2편](https://www.notion.so/Chrome-2-4974f036e9464970bfdd72002602c529) 의 내용을 기반으로 정리하였습니다.
-내용을 정확하게 파악하기 위하여 [Chrome의 내부 동작 1편](https://www.notion.so/Chrome-1-259fd4448dfc4416ba98d041f497b9a6) 내용을 읽는 것을 추천드립니다.
+해당 부분은 [Chrome의 내부 동작 2편](https://areumsheep.notion.site/Chrome-2-4974f036e9464970bfdd72002602c529) 의 내용을 기반으로 정리하였습니다.
+내용을 정확하게 파악하기 위하여 [Chrome의 내부 동작 1편](https://areumsheep.notion.site/Chrome-1-259fd4448dfc4416ba98d041f497b9a6) 내용을 읽는 것을 추천드립니다.
 
 ![**출처**: [https://developer.chrome.com/blog/inside-browser-part2/](https://developer.chrome.com/blog/inside-browser-part2/)](images/Untitled1.png)
 
@@ -120,7 +120,7 @@ Blink는 아래 사항을 포함합니다.
 
 # 1) 문서 로딩하기
 
-해당 부분은 [Chrome의 내부 동작 3편](https://www.notion.so/Chrome-3-a91081b8ced84f9eb57e26ab90adfe5c) 의 내용과 [웹 성능 최적화에 필요한 브라우저의 모든 것 영상 자료](https://tv.naver.com/v/4578425)를 기반으로 정리하였습니다.
+해당 부분은 [Chrome의 내부 동작 3편](https://areumsheep.notion.site/Chrome-3-a91081b8ced84f9eb57e26ab90adfe5c) 의 내용과 [웹 성능 최적화에 필요한 브라우저의 모든 것 영상 자료](https://tv.naver.com/v/4578425)를 기반으로 정리하였습니다.
 
 ![**출처**: [https://www.slideshare.net/deview/125-119068291](https://www.slideshare.net/deview/125-119068291)](images/Untitled3.png)
 
@@ -323,7 +323,7 @@ Raster Thread는 Record한 내용을 바탕으로 각각의 타일들을 비트�
 DisplayItem(렌더 트리, 레이어 트리)을 바탕으로 bitmap을 만드는 일을 rasterization이라고 부릅니다.
 그리고 이 rasterization은 일반적으로 GPU 안에서 이뤄집니다.
 
-[chrome://gpu/](https://www.notion.so/Chrome-1668d19eb79c41e5a5ec349da4049932) 에 접속하여 `Rasterization` 값으로 GPU 가속이 사용되고 있는지 확인할 수 있습니다.
+[chrome://gpu/](https://areumsheep.notion.site/Chrome-1668d19eb79c41e5a5ec349da4049932) 에 접속하여 `Rasterization` 값으로 GPU 가속이 사용되고 있는지 확인할 수 있습니다.
 
 ![**출처**: [https://tecoble.techcourse.co.kr/post/2022-09-26-life-of-pixel/](https://tecoble.techcourse.co.kr/post/2022-09-26-life-of-pixel/)](images/Untitled19.png)
 
@@ -495,9 +495,9 @@ Paint 과정에서 GPU Rasterization을 사용하면 때에 따라 다르지만 
 - Chrome의 내부 동작
   - [https://d2.naver.com/helloworld/9274593](https://d2.naver.com/helloworld/9274593)
   - [https://d2.naver.com/helloworld/5237120](https://d2.naver.com/helloworld/5237120)
-  - [Chrome의 내부 동작 1편](https://www.notion.so/Chrome-1-259fd4448dfc4416ba98d041f497b9a6)
-  - [Chrome의 내부 동작 2편](https://www.notion.so/Chrome-2-4974f036e9464970bfdd72002602c529)
-  - [Chrome의 내부 동작 3편](https://www.notion.so/Chrome-3-a91081b8ced84f9eb57e26ab90adfe5c)
+  - [Chrome의 내부 동작 1편](https://areumsheep.notion.site/Chrome-1-259fd4448dfc4416ba98d041f497b9a6)
+  - [Chrome의 내부 동작 2편](https://areumsheep.notion.site/Chrome-2-4974f036e9464970bfdd72002602c529)
+  - [Chrome의 내부 동작 3편](https://areumsheep.notion.site/Chrome-3-a91081b8ced84f9eb57e26ab90adfe5c)
 - Rendering Engine
   - [https://www.chromium.org/blink/](https://www.chromium.org/blink/)
   - [https://docs.google.com/document/d/1aitSOucL0VHZa9Z2vbRJSyAIsAz24kX8LFByQ5xQnUg/edit#](https://docs.google.com/document/d/1aitSOucL0VHZa9Z2vbRJSyAIsAz24kX8LFByQ5xQnUg/edit#)

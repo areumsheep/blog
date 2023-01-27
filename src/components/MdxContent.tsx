@@ -26,6 +26,9 @@ const MdxContent = styled.div`
   h3 {
     background-color: ${({ theme }) => theme.color['gray50']};
   }
+  h4 {
+    background-color: ${({ theme }) => theme.color['green50']};
+  }
 
   p {
     line-height: 1.5;
@@ -34,7 +37,7 @@ const MdxContent = styled.div`
   ul,
   ol,
   .gatsby-resp-image-wrapper {
-    margin-bottom: 16px;
+    margin: 16px 0;
   }
 
   table {
@@ -52,6 +55,10 @@ const MdxContent = styled.div`
     }
   }
 
+  li > ul {
+    margin-top: 5px;
+  }
+
   hr {
     height: 0.25em;
     margin: 24px 0;
@@ -60,10 +67,13 @@ const MdxContent = styled.div`
     background-color: #30363d;
   }
 
-  li > ul,
-  li > ol {
-    margin-top: 0;
-    margin-bottom: 0;
+  ul,
+  ol {
+    padding-left: 30px;
+    li {
+      line-height: 1.5;
+      color: ${({ theme }) => theme.color['gray400']};
+    }
   }
 
   blockquote {
@@ -108,7 +118,6 @@ const MdxContent = styled.div`
     right: 5px;
 
     font-size: 3em;
-    /* color: ${(p) => p.theme.colors.blockquoteBorder}; */
   }
 
   code {
@@ -129,12 +138,14 @@ const MdxContent = styled.div`
     background-color: unset;
     color: unset;
   }
-  /* aside {
-    background-color: ${({ theme }) => theme.color['livid50']};
-    border-radius: 20px;
-    padding: 18px 20px;
-    margin-bottom: 25px;
-  } */
+
+  a {
+    color: ${({ theme }) => theme.color['blue300']};
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 export default MdxContent;

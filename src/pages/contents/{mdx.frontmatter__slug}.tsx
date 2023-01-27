@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { graphql, PageProps } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import styled from '@emotion/styled';
 import { MDXProvider } from '@mdx-js/react';
 
 import App from 'App';
@@ -11,19 +11,23 @@ import MdxContent from 'components/MdxContent';
 import type { ContentType } from 'types/content';
 import { Callout } from 'components/@common/Callout';
 
+import Calendar from 'images/Calendar.inline.svg';
+
 interface Response {
   mdx: ContentType;
 }
 
 const BlogPost = ({ data, children }: PageProps<Response>) => {
-  const image = getImage((data as any).mdx.frontmatter.hero_image);
   return (
     <App>
       <Layout>
         <Typography variant="h1">{data.mdx.frontmatter.title}</Typography>
-        <Typography variant="body2" color="livid300">
-          {data.mdx.frontmatter.createdAt}
-        </Typography>
+        <Flex>
+          <Calendar />
+          <Typography variant="body2" color="livid300">
+            {data.mdx.frontmatter.createdAt}
+          </Typography>
+        </Flex>
         <MDXProvider
           components={{
             h1: ({ children }) => <Typography variant="h2">{children}</Typography>,
@@ -53,7 +57,7 @@ export const query = graphql`
     mdx(id: { eq: $id }) {
       frontmatter {
         title
-        createdAt(formatString: "MMMM D, YYYY")
+        createdAt(formatString: "YYYY년 MM월 DD일")
       }
     }
   }
@@ -62,3 +66,7 @@ export const query = graphql`
 export const Head = () => <Seo title="브라우저 동작 원리" />;
 
 export default BlogPost;
+
+const Flex = styled.div`
+  display: flex;
+`;

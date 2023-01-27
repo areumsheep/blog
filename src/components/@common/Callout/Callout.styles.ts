@@ -5,7 +5,7 @@ export const Callout = styled.aside`
   align-items: center;
   border-radius: 20px;
   padding: 18px 20px;
-  margin-bottom: 25px;
+  margin: 25px 0;
   background-color: ${({ theme }) => theme.color.livid50};
 `;
 
