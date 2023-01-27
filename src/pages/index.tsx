@@ -9,6 +9,8 @@ import Seo from '../components/Seo';
 import { Typography } from 'components/@common/Typography';
 import type { ContentType } from 'types/content';
 
+import Calendar from 'images/Calendar.inline.svg';
+import Time from 'images/Time.inline.svg';
 import MisoCharacter from 'images/miso.jpeg';
 
 interface Response {
@@ -18,6 +20,8 @@ interface Response {
 }
 
 const IndexPage = ({ data }: PageProps<Response>) => {
+  const { nodes } = data.allMdx;
+
   return (
     <App>
       <Layout>
@@ -31,7 +35,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
               <Typography variant="body1" color="gray400">
                 꾸준히 깊게 공부하기
               </Typography>
-              <Flex>
+              <LinkWrapper>
                 <a href="https://github.com/areumsheep">
                   <Typography variant="body2" color="gray400">
                     Github
@@ -42,7 +46,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
                     LinkedIn
                   </Typography>
                 </a>
-              </Flex>
+              </LinkWrapper>
             </Callout.Description>
           </Callout>
         </Wrapper>
@@ -50,7 +54,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
           All Posts
         </Typography>
         <div>
-          {data?.allMdx.nodes.map((node) => (
+          {nodes.map((node) => (
             <a href={`/contents/${node.frontmatter.slug}`}>
               <Article>
                 <Typography variant="h3" color="gray600">
@@ -60,9 +64,31 @@ const IndexPage = ({ data }: PageProps<Response>) => {
                   {node.frontmatter.description}
                 </Typography>
                 <Detail>
-                  <Typography variant="body2" color="livid300">
-                    {node.frontmatter.createdAt}
-                  </Typography>
+                  <Tags>
+                    {node.frontmatter.tags.map((tag) => (
+                      <Tag>
+                        <Typography variant="subtitle1" color="livid300">
+                          {tag}
+                        </Typography>
+                      </Tag>
+                    ))}
+                  </Tags>
+
+                  <Sub>
+                    <Flex>
+                      <Calendar />
+                      <Typography variant="body2" color="livid300">
+                        {node.frontmatter.createdAt}
+                      </Typography>
+                    </Flex>
+
+                    <Flex>
+                      <Time />
+                      <Typography variant="body2" color="livid300">
+                        10분
+                      </Typography>
+                    </Flex>
+                  </Sub>
                 </Detail>
               </Article>
             </a>
@@ -82,10 +108,11 @@ export const query = graphql`
     allMdx(sort: { frontmatter: { createdAt: DESC } }) {
       nodes {
         frontmatter {
+          slug
           title
           description
-          createdAt(formatString: "MMMM DD, YYYY")
-          slug
+          tags
+          createdAt(formatString: "YYYY년 MM월 DD일")
         }
         id
         excerpt
@@ -108,6 +135,10 @@ const Wrapper = styled.div`
 
 const Flex = styled.div`
   display: flex;
+  /* align-items: center; */
+`;
+
+const LinkWrapper = styled(Flex)`
   column-gap: 8px;
   margin-top: 10px;
 `;
@@ -118,6 +149,25 @@ const Article = styled.article`
 
 const Detail = styled.div`
   display: flex;
-  justify-content: flex-end;
-  column-gap: 10px;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  svg {
+    margin-right: 3px;
+  }
+`;
+
+const Tags = styled.div`
+  display: flex;
+  column-gap: 5px;
+`;
+
+const Tag = styled.div`
+  padding: 5px 15px;
+  border-radius: 20px;
+  background-color: ${({ theme }) => theme.color['livid50']};
+`;
+
+const Sub = styled(Flex)`
+  column-gap: 7px;
 `;

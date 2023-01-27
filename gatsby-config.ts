@@ -34,16 +34,17 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: `gatsby-remark-interactive-gifs`,
-      options: {
-        root: `${__dirname}`,
-        src: `${__dirname}/contents/gif/**/images`,
-      },
-    },
-    {
       resolve: 'gatsby-plugin-google-gtag',
       options: {
         trackingIds: ['G-FMSV8JQ26N'],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /\.inline\.svg$/,
+        },
       },
     },
   ],
