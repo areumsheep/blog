@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Callout = styled.div`
+export const Callout = styled.aside`
   display: flex;
   align-items: center;
   border-radius: 20px;

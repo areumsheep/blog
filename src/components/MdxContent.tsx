@@ -1,14 +1,6 @@
 import styled from '@emotion/styled';
 
 const MdxContent = styled.div`
-  font-size: 16px;
-  line-height: 1.5;
-
-  p {
-    margin-top: 0;
-    margin-bottom: 16px;
-  }
-
   img {
     width: 100%;
   }
@@ -19,42 +11,24 @@ const MdxContent = styled.div`
   h4,
   h5,
   h6 {
-    margin-top: 24px;
-    margin-bottom: 16px;
-    line-height: 1.25;
-    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 7px;
+    padding: 3px;
 
     > a.anchor path {
       fill: white;
     }
   }
 
-  h1 {
-    padding-bottom: 0.3em;
-    border-bottom: 1px solid #21262d;
-    font-size: 2.125em;
-  }
-
   h2 {
-    padding-bottom: 0.3em;
-    border-bottom: 1px solid #21262d;
-    font-size: 1.625em;
+    background-color: ${({ theme }) => theme.color['blue100']};
   }
-
   h3 {
-    font-size: 1.5em;
+    background-color: ${({ theme }) => theme.color['gray50']};
   }
 
-  h4 {
-    font-size: 1.25em;
-  }
-
-  h5 {
-    font-size: 1em;
-  }
-
-  h6 {
-    font-size: 0.9375em;
+  p {
+    line-height: 1.5;
   }
 
   ul,
@@ -142,16 +116,11 @@ const MdxContent = styled.div`
     border-radius: 2px;
 
     font-size: 0.85em;
-
-    /* background-color: ${(p) => p.theme.colors.code};
-    color: ${(p) => p.theme.colors.onCode}; */
     white-space: break-spaces;
   }
 
   pre[class*='language-'] {
     margin-bottom: 16px;
-
-    /* overflow-x: auto; */
   }
 
   pre > code {
@@ -160,18 +129,12 @@ const MdxContent = styled.div`
     background-color: unset;
     color: unset;
   }
-  aside {
+  /* aside {
     background-color: ${({ theme }) => theme.color['livid50']};
     border-radius: 20px;
     padding: 18px 20px;
     margin-bottom: 25px;
-  }
-
-  li {
-    &::marker {
-      padding-left: 20px;
-    }
-  }
+  } */
 `;
 
 export default MdxContent;

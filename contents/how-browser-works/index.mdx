@@ -7,18 +7,16 @@ createdAt: '2023-01-24 01:09:25'
 updatedAt: ''
 ---
 
-# 브라우저 동작 과정
-
-<aside>
+<Callout>
 **Create Date**: 2023/01/20   
 **Update Date**: 2023/01/24
-
-[Life of a pixel](http://bit.ly/lifeofapixel), [웹 성능 최적화에 필요한 브라우저의 모든 것](https://tv.naver.com/v/4578425)을 보고 정리한 내용입니다.
-
+         
+[Life of a pixel](http://bit.ly/lifeofapixel), [웹 성능 최적화에 필요한 브라우저의 모든 것](https://tv.naver.com/v/4578425)을 보고 정리한 내용입니다.       
+            
 [NAVER DEVIEW 2018 웹 성능 최적화에 필요한 브라우저의 모든 것 영상 요약](https://ssocoit.tistory.com/263), [Life of Pixel](https://tecoble.techcourse.co.kr/post/2022-09-26-life-of-pixel) 글을
 참고하였습니다. (추가적으로 참고한 글은 참고 자료 부분에 작성하였습니다.)
 
-</aside>
+</Callout>
 
 브라우저가 페이지의 초기 출력을 위해 실행해야 하는 순서를 [Critical Rendering Path(CRP)](https://developer.mozilla.org/ko/docs/Web/Performance/Critical_rendering_path)라고 부릅니다.
 저희는 오늘 Chrome 브라우저를 통해 이 과정에 대해 자세히 알아볼 예정입니다.
@@ -93,7 +91,7 @@ Blink는 아래 사항을 포함합니다.
 - [Safe Browsing 검사](https://safebrowsing.google.com/)를 실행하여 도메인과 응답 데이터가 악성 사이트로 알려진 사이트와 일치하는 것 같다면 네트워크 스레드는 경고 페이지를 표시하라고 알립니다.
 - cross-site 간 데이터가 렌더러 프로세스에게 전달되지 않도록 [CORB(Cross-Origin Read Blocking)](https://www.chromium.org/Home/chromium-security/corb-for-developers/) 검사가 수행됩니다.
 
-## 0-4) 실행할 렌더러 프로세스를 찾기
+## 0-4) 실행할 렌더러 프로세스 찾기
 
 모든 검사가 끝나고 브라우저가 요청된 사이트로 이동해야 한다고 네트워크 스레드가 확신하면 네트워크 스레드는 UI 스레드에게 준비되었다고 알립니다.
 
@@ -153,12 +151,12 @@ DOM 모델은 Document를 처리하는 모델에서 많이 사용됩니다.
 
 HTML 파서의 첫 번째 특징은 **오류에 너그러운 속성**입니다.
 
-<aside>
-🤔 **만약 `<p>Hello</b>` 같은 이상한 태그를 만나면 DOM 트리가 그려지지 않나요?**
-그렇지 않습니다! DOM 트리를 만들 때의 핵심은 바로 **예외처리**입니다. 
+<Callout>
+🤔 **만약 `<p>Hello</b>` 같은 이상한 태그를 만나면 DOM 트리가 그려지지 않나요?**    
+그렇지 않습니다! DOM 트리를 만들 때의 핵심은 바로 **예외처리**입니다.    
 [HTML Standard](https://html.spec.whatwg.org/multipage/parsing.html#an-introduction-to-error-handling-and-strange-cases-in-the-parser)에 이상한 사례까지 처리가 되어 있기에 그려집니다. 다만 예외처리 방식에 따라 DOM 트리의 형태가 달라질 수 있습니다.
 
-</aside>
+</Callout>
 
 두 번째 특징은 **파싱 과정이 중단될 수 있다는 것**입니다.
 
@@ -335,12 +333,12 @@ DisplayItem(렌더 트리, 레이어 트리)을 바탕으로 bitmap을 만드는
 
 이 때 SKIA와 OpenGL을 사용하는데 SKIA 라이브러리에서 제공하는 API를 이용하면 OpenGL API로 변환됩니다. 즉, SKIA는 더 고수준의 API입니다.
 
-<aside>
+<Callout>
 🤩 구글 개발자 도구의 Rendering > Layer borders를 사용하면 레이어가 어떻게 나뉘어있는지 확인할 수 있습니다!
 
 ![Untitled](images/Untitled20.png)
 
-</aside>
+</Callout>
 
 # 2) 화면을 그린 이후 일어나는 변화에 대응하기
 
