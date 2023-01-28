@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
 const MdxContent = styled.div`
+  max-width: 680px;
+  overflow-wrap: break-word;
   img {
     width: 100%;
   }
