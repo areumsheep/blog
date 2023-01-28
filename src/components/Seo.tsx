@@ -12,11 +12,7 @@ const Seo = ({ title }: SeoProps) => {
       }
     }
   `);
-  return (
-    <title>
-      {title} | {data.site.siteMetadata.title}
-    </title>
-  );
+  return <title>{title}</title>;
 };
 
 export default Seo;

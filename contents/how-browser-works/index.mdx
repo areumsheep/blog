@@ -12,7 +12,7 @@ updatedAt: ''
 **Update Date**: 2023/01/24
 <br/>
 
-위 글은 [자바스크립트 등산 스터디](https://github.com/FECrash/JavaScript-Mountain)의 발표를 위해 만들어진 자료입니다. 
+위 글은 [자바스크립트 등산 스터디](https://github.com/FECrash/JavaScript-Mountain)의 발표를 위해 만들어진 자료입니다.
 
 <br />
 대부분 [Life of a pixel](http://bit.ly/lifeofapixel), [웹 성능 최적화에 필요한 브라우저의 모든 것](https://tv.naver.com/v/4578425)을
@@ -365,7 +365,7 @@ DisplayItem(렌더 트리, 레이어 트리)을 바탕으로 bitmap을 만드는
 변환됩니다. 즉, SKIA는 더 고수준의 API입니다.
 
 <Callout>
-🤩 구글 개발자 도구의 Rendering > Layer borders를 사용하면 레이어가 어떻게 나뉘어있는지 확인할 수 있습니다!
+🤩 구글 개발자 도구의 Rendering > Layer borders를 사용하면 화면이 어떻게 분리되어 렌더링 됐는지 확인할 수 있습니다!
 
 ![Untitled](images/Untitled20.png)
 
@@ -437,7 +437,12 @@ Composite은 여러 레이어들을 합성하여 한 장의 비트맵으로 만�
 <br />이 기법을 Tiled Backing Store 기법이라고 하며 이 기법을 통해 화면을 재사용할 수 있습니다.
 <br />{' '}
 
-> [https://youtu.be/M2ORkIrHUbg?t=222](https://youtu.be/M2ORkIrHUbg?t=222)
+> ["The Animation Process From 1938"](https://youtu.be/M2ORkIrHUbg?t=222)(1938년의 애니메이션 제작 과정) 영상을 보면 레이어를 나누는 것과 애니메이션 성능 향상의 관계를 이해하는 데 도움이 될 것입니다.
+>
+> <br />
+> 해당 영상에는 배경은 그대로 두고 캐릭터만 변경하여 프레임을 촬영하고 있습니다. <br />
+> 만약 배경과 캐릭터를 분리하지 않았다면 (즉, 레이어를 나누지 않았다면) 애니메이션 프레임마다 배경도
+> 같이 그려야 했을 것입니다.
 
 해당 영상에선 배경을 그대로 두고 캐릭터만 바꾸며 다음 장면을 연출하고 있습니다.  
 이것과 비슷한 방법으로 화면을 재사용할 수 있게 되는 것입니다.
@@ -495,7 +500,14 @@ task queue에 넣습니다.
 11. DrawQuads를 생성합니다.
 12. Skia와 OpenGL를 통해 DrawQuads를 실제 스크린에 그립니다. (pixel화)
 
-# TMI) 과정을 통해 최적화하는 방법 이해하기
+# 과정을 통해 최적화하는 방법 이해하기
+
+저희는 브라우저 동작 원리를 왜 알아야 할까요?
+
+<br />
+
+개인적으로 공부하며 든 생각은 우리가 개발하는 애플리케이션이 브라우저에서 돌아가기에 브라우저를 더 명확히
+알면 성능을 고민할 때 더 빠르게 답을 얻을 수 있을 것입니다.
 
 ![Untitled](images/Untitled30.png)
 

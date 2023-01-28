@@ -55,7 +55,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
         </Typography>
         <div>
           {nodes.map((node) => (
-            <a href={`/contents/${node.frontmatter.slug}`}>
+            <a key={node.id} href={`/contents/${node.frontmatter.slug}`}>
               <Article>
                 <Typography variant="h3" color="gray600">
                   {node.frontmatter.title}
@@ -144,7 +144,12 @@ const LinkWrapper = styled(Flex)`
 `;
 
 const Article = styled.article`
-  margin-top: 25px;
+  padding: 15px;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color['secondary']};
+    border-radius: 20px;
+  }
 `;
 
 const Detail = styled.div`

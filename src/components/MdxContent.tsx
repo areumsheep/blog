@@ -78,15 +78,12 @@ const MdxContent = styled.div`
 
   blockquote {
     position: relative;
+    background-color: ${({ theme }) => theme.color['livid50']};
 
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 16px;
     padding: 16px 32px;
-    /* border-left: 1px solid ${(p) => p.theme.colors.blockquoteBorder}; */
-    border-left-width: 10px;
-
-    /* background-color: ${(p) => p.theme.colors.blockquote}; */
 
     > :first-child {
       margin-top: 0;
@@ -108,13 +105,12 @@ const MdxContent = styled.div`
     left: 5px;
 
     font-size: 3em;
-    /* color: ${(p) => p.theme.colors.blockquoteBorder}; */
   }
   blockquote:after {
     content: '"';
 
     position: absolute;
-    bottom: -30px;
+    bottom: -45px;
     right: 5px;
 
     font-size: 3em;
