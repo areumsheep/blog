@@ -1,5 +1,9 @@
 import type { GatsbyConfig } from 'gatsby';
 
+require('dotenv').config({
+  path: `.env`,
+});
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `blog`,
@@ -43,7 +47,7 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-plugin-google-gtag',
       options: {
-        trackingIds: ['G-FMSV8JQ26N'],
+        trackingIds: [process.env.GOOGLE_ANALYTICS_ID],
       },
     },
     {
@@ -52,6 +56,14 @@ const config: GatsbyConfig = {
         rule: {
           include: /\.inline\.svg$/,
         },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-hotjar`,
+      options: {
+        includeInDevelopment: true, // optional parameter to include script in development
+        id: process.env.HOTJAR_ID,
+        sv: process.env.HOTJAR_VERSION,
       },
     },
   ],
