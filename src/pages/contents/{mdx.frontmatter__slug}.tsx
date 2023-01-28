@@ -63,7 +63,12 @@ export const query = graphql`
   }
 `;
 
-export const Head = () => <Seo title="브라우저 동작 원리" />;
+export const Head = () => (
+  <Seo
+    title="브라우저 동작 원리"
+    description="크롬 브라우저는 어떻게 웹사이트를 화면에 그려줄까요?"
+  />
+);
 
 export default BlogPost;
 

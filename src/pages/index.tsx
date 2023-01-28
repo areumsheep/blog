@@ -99,7 +99,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
   );
 };
 
-export const Head: HeadFC = () => <Seo title="Miso :-)" />;
+export const Head: HeadFC = () => <Seo title="Miso :-)" description="미소의 개발 블로그" />;
 
 export default IndexPage;
 

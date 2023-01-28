@@ -4,11 +4,15 @@ require('dotenv').config({
   path: `.env`,
 });
 
+const siteMetadata = {
+  title: 'tech blog',
+  author: 'areumsheep',
+  siteUrl: 'https://blog.areumsheep.vercel.app/',
+  description: 'Miso의 기술 블로그',
+};
+
 const config: GatsbyConfig = {
-  siteMetadata: {
-    title: `blog`,
-    siteUrl: `https://www.yourdomain.tld`,
-  },
+  siteMetadata,
   graphqlTypegen: true,
   plugins: [
     'gatsby-plugin-root-import',
@@ -16,6 +20,18 @@ const config: GatsbyConfig = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     `gatsby-plugin-emotion`,
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: siteMetadata.title,
+        short_name: siteMetadata.title,
+        short_url: '/',
+        background_color: '#ffffff',
+        theme_color: '#F0A455',
+        display: 'standalone',
+        icon: 'src/images/favicon.png',
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
