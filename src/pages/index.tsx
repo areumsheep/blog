@@ -175,4 +175,5 @@ const Tag = styled.div`
 
 const Sub = styled(Flex)`
   column-gap: 7px;
+  align-items: center;
 `;
