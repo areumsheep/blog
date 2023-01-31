@@ -8,6 +8,7 @@ import { Layout } from 'components/Layout';
 import { Callout } from 'components/@common/Callout';
 import Seo from '../components/Seo';
 import { Typography } from 'components/@common/Typography';
+import { Anchor } from 'components/@common/Anchor';
 import type { ContentType } from 'types/content';
 
 import Calendar from 'images/Calendar.inline.svg';
@@ -36,16 +37,16 @@ const IndexPage = ({ data }: PageProps<Response>) => {
                 꾸준히 깊게 공부하기
               </Typography>
               <LinkWrapper>
-                <a href="https://github.com/areumsheep">
-                  <Typography variant="body2" color="gray400">
-                    Github
-                  </Typography>
-                </a>
-                <a href="https://www.linkedin.com/in/%EC%95%84%EB%A6%84-%EC%96%91-74b140236/">
-                  <Typography variant="body2" color="gray400">
-                    LinkedIn
-                  </Typography>
-                </a>
+                <Anchor href="https://github.com/areumsheep" variant="body2" color="gray400">
+                  Github
+                </Anchor>
+                <Anchor
+                  href="https://www.linkedin.com/in/%EC%95%84%EB%A6%84-%EC%96%91-74b140236/"
+                  variant="body2"
+                  color="gray400"
+                >
+                  LinkedIn
+                </Anchor>
               </LinkWrapper>
             </Callout.Description>
           </Callout>
