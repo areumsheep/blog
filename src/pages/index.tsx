@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import App from 'App';
 import { Seo, Layout, LabeledIcon } from 'components';
-import { Callout, Typography, Anchor } from 'components/@common';
+import { Callout, Typography, Anchor, Chip } from 'components/@common';
 
 import type { ContentType } from 'types/content';
 import { getReadingTime } from 'utils/getReadingTime';
@@ -66,11 +66,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
                 <Detail>
                   <Tags>
                     {node.frontmatter.tags.map((tag) => (
-                      <Tag>
-                        <Typography variant="subtitle1" color="livid300">
-                          {tag}
-                        </Typography>
-                      </Tag>
+                      <Chip>{tag}</Chip>
                     ))}
                   </Tags>
 
