@@ -28,7 +28,6 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
           <Flex>
             <LabeledIcon icon={<Time />} label={`${getReadingTime(data.mdx.body)}분`} />
             <LabeledIcon icon={<View />} label={'300명의 사람이 읽어봤어요'} />
-            //TODO 조회수 추가
           </Flex>
         </Flex>
         <MDXProvider
