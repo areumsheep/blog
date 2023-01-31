@@ -18,18 +18,8 @@ const MdxContent = styled.div`
     padding: 3px;
 
     > a.anchor path {
-      fill: white;
+      fill: ${({ theme }) => theme.color['primary']} !important;
     }
-  }
-
-  h2 {
-    background-color: ${({ theme }) => theme.color['blue100']};
-  }
-  h3 {
-    background-color: ${({ theme }) => theme.color['gray50']};
-  }
-  h4 {
-    background-color: ${({ theme }) => theme.color['green50']};
   }
 
   p {
@@ -87,9 +77,9 @@ const MdxContent = styled.div`
     margin-bottom: 16px;
     padding: 16px 32px;
 
-    > :first-child {
+    /* > :first-child {
       margin-top: 0;
-    }
+    } */
     > :last-child {
       margin-bottom: 0;
     }

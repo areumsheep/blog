@@ -16,10 +16,6 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     'gatsby-plugin-root-import',
-    'gatsby-plugin-image',
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
-    `gatsby-plugin-emotion`,
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -43,6 +39,7 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-plugin-mdx',
       options: {
         gatsbyRemarkPlugins: [
+          `gatsby-remark-autolink-headers`,
           {
             resolve: 'gatsby-remark-images',
             options: {
@@ -82,6 +79,10 @@ const config: GatsbyConfig = {
         sv: process.env.HOTJAR_VERSION,
       },
     },
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
+    `gatsby-plugin-emotion`,
   ],
 };
 

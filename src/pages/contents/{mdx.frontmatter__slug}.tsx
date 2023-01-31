@@ -30,9 +30,21 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
         </Flex>
         <MDXProvider
           components={{
-            h1: ({ children }) => <Typography variant="h2">{children}</Typography>,
-            h2: ({ children }) => <Typography variant="h3">{children}</Typography>,
-            h3: ({ children }) => <Typography variant="h4">{children}</Typography>,
+            h1: ({ children, id, style }) => (
+              <Typography variant="h2" id={id} style={style}>
+                {children}
+              </Typography>
+            ),
+            h2: ({ children, id, style }) => (
+              <Typography variant="h3" id={id} style={style}>
+                {children}
+              </Typography>
+            ),
+            h3: ({ children, id, style }) => (
+              <Typography variant="h4" id={id} style={style}>
+                {children}
+              </Typography>
+            ),
             p: ({ children }) => (
               <Typography variant="body1" color="gray400">
                 {children}
