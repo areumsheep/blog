@@ -3,7 +3,7 @@ import { graphql, PageProps } from 'gatsby';
 import { MDXProvider } from '@mdx-js/react';
 
 import App from 'App';
-import { Seo, Layout, MdxContent } from 'components';
+import { Seo, Layout, MdxContent, LabeledIcon } from 'components';
 import { Typography, Callout, Flex } from 'components/@common';
 
 import type { ContentType } from 'types/content';
@@ -23,25 +23,12 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
       <Layout>
         <Typography variant="h1">{data.mdx.frontmatter.title}</Typography>
         <Flex justifyContent="space-between" style={{ marginTop: '5px' }}>
-          <Flex alignItems="flex-start">
-            <Calendar />
-            <Typography variant="body2" color="livid300">
-              {data.mdx.frontmatter.createdAt}
-            </Typography>
-          </Flex>
+          <LabeledIcon icon={<Calendar />} label={data.mdx.frontmatter.createdAt} />
+
           <Flex>
-            <Flex alignItems="flex-start" style={{ marginRight: '10px' }}>
-              <Time />
-              <Typography variant="body2" color="livid300">
-                {getReadingTime(data.mdx.body)}분
-              </Typography>
-            </Flex>
-            <Flex alignItems="flex-start">
-              <View />
-              <Typography variant="body2" color="livid300">
-                300명의 사람이 읽어봤어요
-              </Typography>
-            </Flex>
+            <LabeledIcon icon={<Time />} label={`${getReadingTime(data.mdx.body)}분`} />
+            <LabeledIcon icon={<View />} label={'300명의 사람이 읽어봤어요'} />
+            //TODO 조회수 추가
           </Flex>
         </Flex>
         <MDXProvider

@@ -4,7 +4,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 
 import App from 'App';
-import { Seo, Layout } from 'components';
+import { Seo, Layout, LabeledIcon } from 'components';
 import { Callout, Typography, Anchor } from 'components/@common';
 
 import type { ContentType } from 'types/content';
@@ -75,19 +75,8 @@ const IndexPage = ({ data }: PageProps<Response>) => {
                   </Tags>
 
                   <Sub>
-                    <Flex>
-                      <Calendar />
-                      <Typography variant="body2" color="livid300">
-                        {node.frontmatter.createdAt}
-                      </Typography>
-                    </Flex>
-
-                    <Flex>
-                      <Time />
-                      <Typography variant="body2" color="livid300">
-                        {getReadingTime(node.body)}분
-                      </Typography>
-                    </Flex>
+                    <LabeledIcon icon={<Calendar />} label={node.frontmatter.createdAt} />
+                    <LabeledIcon icon={<Time />} label={`${getReadingTime(node.body)}분`} />
                   </Sub>
                 </Detail>
               </Article>

@@ -14,7 +14,7 @@ const buildVariant = (
   as: ElementType,
   fontWeight = FontWeights.Regular,
   fontSize = 16,
-  lineHeight = 1.2,
+  lineHeight: number | string,
 ) => ({
   as,
   fontWeight,
@@ -29,7 +29,7 @@ export const variants = {
   h4: buildVariant('h4', FontWeights.SemiBold, 18, 1.2),
   h5: buildVariant('h5', FontWeights.SemiBold, 16, 1.2),
   body1: buildVariant('p', FontWeights.Regular, 16, 1.2),
-  body2: buildVariant('p', FontWeights.Regular, 13, 1.2),
+  body2: buildVariant('p', FontWeights.Regular, 13, 'normal'),
   body3: buildVariant('p', FontWeights.Medium, 13, 2),
   subtitle1: buildVariant('span', FontWeights.SemiBold, 13, 1.2),
 };
