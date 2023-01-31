@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { graphql, HeadFC, PageProps } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 
 import App from 'App';
@@ -11,7 +12,6 @@ import type { ContentType } from 'types/content';
 
 import Calendar from 'images/Calendar.inline.svg';
 import Time from 'images/Time.inline.svg';
-import MisoCharacter from 'images/miso.jpeg';
 
 interface Response {
   allMdx: {
@@ -28,7 +28,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
         <Wrapper>
           <Callout>
             <Callout.Icon>
-              <img src={MisoCharacter} alt="미소의 세상 미소 캐릭터" width={70} />
+              <StaticImage src="../images/miso.jpeg" alt="미소의 세상 미소 캐릭터" />
             </Callout.Icon>
             <Callout.Description>
               <Typography variant="h3">미소</Typography>
@@ -144,11 +144,13 @@ const LinkWrapper = styled(Flex)`
 `;
 
 const Article = styled.article`
-  padding: 15px;
+  padding: 20px 15px;
+  border-bottom: 1px solid ${({ theme }) => theme.color['livid50']};
 
   &:hover {
     background-color: ${({ theme }) => theme.color['secondary']};
     border-radius: 20px;
+    transform: scale(0.98);
   }
 `;
 
@@ -168,7 +170,7 @@ const Tags = styled.div`
 `;
 
 const Tag = styled.div`
-  padding: 5px 15px;
+  padding: 3px 15px;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.color['livid50']};
 `;
