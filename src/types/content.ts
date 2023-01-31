@@ -1,4 +1,5 @@
 export interface ContentType {
+  body: string;
   frontmatter: {
     slug: string;
     title: string;

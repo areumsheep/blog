@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { graphql, PageProps } from 'gatsby';
-import styled from '@emotion/styled';
 import { MDXProvider } from '@mdx-js/react';
 
 import App from 'App';
-import { Layout } from 'components/Layout';
-import { Typography } from 'components/@common/Typography';
-import Seo from '../../components/Seo';
-import MdxContent from 'components/MdxContent';
+import { Seo, Layout, MdxContent } from 'components';
+import { Typography, Callout, Flex } from 'components/@common';
+
 import type { ContentType } from 'types/content';
-import { Callout } from 'components/@common/Callout';
+import { getReadingTime } from 'utils/getReadingTime';
 
 import Calendar from 'images/Calendar.inline.svg';
+import Time from 'images/Time.inline.svg';
+import View from 'images/View.inline.svg';
 
 interface Response {
   mdx: ContentType;
@@ -22,11 +22,27 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
     <App>
       <Layout>
         <Typography variant="h1">{data.mdx.frontmatter.title}</Typography>
-        <Flex>
-          <Calendar />
-          <Typography variant="body2" color="livid300">
-            {data.mdx.frontmatter.createdAt}
-          </Typography>
+        <Flex justifyContent="space-between" style={{ marginTop: '5px' }}>
+          <Flex alignItems="flex-start">
+            <Calendar />
+            <Typography variant="body2" color="livid300">
+              {data.mdx.frontmatter.createdAt}
+            </Typography>
+          </Flex>
+          <Flex>
+            <Flex alignItems="flex-start" style={{ marginRight: '10px' }}>
+              <Time />
+              <Typography variant="body2" color="livid300">
+                {getReadingTime(data.mdx.body)}분
+              </Typography>
+            </Flex>
+            <Flex alignItems="flex-start">
+              <View />
+              <Typography variant="body2" color="livid300">
+                300명의 사람이 읽어봤어요
+              </Typography>
+            </Flex>
+          </Flex>
         </Flex>
         <MDXProvider
           components={{
@@ -67,6 +83,7 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
 export const query = graphql`
   query ($id: String) {
     mdx(id: { eq: $id }) {
+      body
       frontmatter {
         title
         createdAt(formatString: "YYYY년 MM월 DD일")
@@ -83,7 +100,3 @@ export const Head = () => (
 );
 
 export default BlogPost;
-
-const Flex = styled.div`
-  display: flex;
-`;

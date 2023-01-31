@@ -4,11 +4,9 @@ import { StaticImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 
 import App from 'App';
-import { Layout } from 'components/Layout';
-import { Callout } from 'components/@common/Callout';
-import Seo from '../components/Seo';
-import { Typography } from 'components/@common/Typography';
-import { Anchor } from 'components/@common/Anchor';
+import { Seo, Layout } from 'components';
+import { Callout, Typography, Anchor } from 'components/@common';
+
 import type { ContentType } from 'types/content';
 
 import Calendar from 'images/Calendar.inline.svg';

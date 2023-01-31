@@ -29,6 +29,6 @@ export const globalStyles = css`
     cursor: pointer;
   }
   svg {
-    margin-right: 4px;
+    margin-right: 3px;
   }
 `;
