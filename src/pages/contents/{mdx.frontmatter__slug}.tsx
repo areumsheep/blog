@@ -25,7 +25,7 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
         <Flex justifyContent="space-between" style={{ marginTop: '5px' }}>
           <LabeledIcon icon={<Calendar />} label={data.mdx.frontmatter.createdAt} />
 
-          <Flex>
+          <Flex gap={10}>
             <LabeledIcon icon={<Time />} label={`${getReadingTime(data.mdx.body)}분`} />
             <LabeledIcon icon={<View />} label={'300명의 사람이 읽어봤어요'} />
           </Flex>

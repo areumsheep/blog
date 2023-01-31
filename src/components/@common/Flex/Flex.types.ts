@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
 
 export interface FlexProps extends HTMLAttributes<HTMLDivElement> {
+  gap?: number;
   display?: 'flex' | 'inline-flex';
   flexDirection?: 'column-reverse' | 'column' | 'row-reverse' | 'row';
   justifyContent?:

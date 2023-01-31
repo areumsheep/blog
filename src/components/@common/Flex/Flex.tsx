@@ -5,6 +5,7 @@ import * as Styled from './Flex.styles';
 const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
   (
     {
+      gap,
       display = 'flex',
       flexDirection = 'row',
       justifyContent = 'center',
@@ -16,6 +17,7 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
   ) => {
     return (
       <Styled.Flex
+        gap={gap ?? 0}
         display={display}
         flexDirection={flexDirection}
         justifyContent={justifyContent}
