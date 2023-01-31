@@ -36,6 +36,7 @@ export const variants = {
 
 export interface TypographyProps
   extends HTMLAttributes<HTMLHeadingElement | HTMLParagraphElement | HTMLSpanElement> {
+  as?: ElementType;
   color?: keyof typeof theme.color;
   variant?: keyof typeof variants;
 }
