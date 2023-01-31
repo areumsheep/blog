@@ -8,6 +8,7 @@ import { Seo, Layout } from 'components';
 import { Callout, Typography, Anchor } from 'components/@common';
 
 import type { ContentType } from 'types/content';
+import { getReadingTime } from 'utils/getReadingTime';
 
 import Calendar from 'images/Calendar.inline.svg';
 import Time from 'images/Time.inline.svg';
@@ -84,7 +85,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
                     <Flex>
                       <Time />
                       <Typography variant="body2" color="livid300">
-                        10분
+                        {getReadingTime(node.body)}분
                       </Typography>
                     </Flex>
                   </Sub>
@@ -106,6 +107,7 @@ export const query = graphql`
   query {
     allMdx(sort: { frontmatter: { createdAt: DESC } }) {
       nodes {
+        body
         frontmatter {
           slug
           title
