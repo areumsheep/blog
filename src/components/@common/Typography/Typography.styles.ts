@@ -6,5 +6,5 @@ export const Typography = styled.span<TypographyProps>`
 
   font-size: ${({ variant = 'body1' }) => variants[variant].fontSize}px;
   font-weight: ${({ variant = 'body1' }) => variants[variant].fontWeight};
-  line-height: ${({ variant = 'body1' }) => variants[variant].lineHeight};
+  line-height: ${({ variant = 'body1', lineHeight }) => lineHeight || variants[variant].lineHeight};
 `;

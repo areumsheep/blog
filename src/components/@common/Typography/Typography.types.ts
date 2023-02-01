@@ -39,4 +39,5 @@ export interface TypographyProps
   as?: ElementType;
   color?: keyof typeof theme.color;
   variant?: keyof typeof variants;
+  lineHeight?: number;
 }

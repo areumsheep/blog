@@ -5,12 +5,13 @@ import * as Styled from './Typography.styles';
 const Typography = React.forwardRef<
   HTMLHeadingElement | HTMLParagraphElement | HTMLSpanElement,
   TypographyProps
->(({ as, color = 'gray700', variant = 'body1', children, ...attributes }, ref) => {
+>(({ as, color = 'gray700', variant = 'body1', lineHeight, children, ...attributes }, ref) => {
   return (
     <Styled.Typography
       as={as || variants[variant].as}
       color={color}
       variant={variant}
+      lineHeight={lineHeight}
       ref={ref}
       {...attributes}
     >
