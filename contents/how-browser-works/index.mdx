@@ -7,22 +7,11 @@ createdAt: '2023-01-24 01:09:25'
 updatedAt: ''
 ---
 
-<Callout>
-**Create Date**: 2023/01/20   
-**Update Date**: 2023/01/24
-<br/>
-
-위 글은 [자바스크립트 등산 스터디](https://github.com/FECrash/JavaScript-Mountain)의 발표를 위해 만들어진 자료입니다.
-
-<br />
-대부분 [Life of a pixel](http://bit.ly/lifeofapixel), [웹 성능 최적화에 필요한 브라우저의 모든 것](https://tv.naver.com/v/4578425)을
-정리한 내용이며, <br />
-[NAVER DEVIEW 2018 웹 성능 최적화에 필요한 브라우저의 모든 것 영상
-요약](https://ssocoit.tistory.com/263), [Life of
-Pixel](https://tecoble.techcourse.co.kr/post/2022-09-26-life-of-pixel) 글을 참고하였습니다.
-(추가적으로 참고한 글은 참고 자료 부분에 작성하였습니다.)
-
-</Callout>
+> 본 글은 <b>[자바스크립트 등산 스터디](https://github.com/FECrash/JavaScript-Mountain)</b>의 발표를 위해 만들어진 자료입니다.
+> <br/>
+> 대부분 [Life of a pixel](http://bit.ly/lifeofapixel), [웹 성능 최적화에 필요한 브라우저의 모든 것](https://tv.naver.com/v/4578425)을 정리한 내용이며,   
+> [NAVER DEVIEW 2018 웹 성능 최적화에 필요한 브라우저의 모든 것 영상 요약](https://ssocoit.tistory.com/263), [Life of Pixel](https://tecoble.techcourse.co.kr/post/2022-09-26-life-of-pixel) 글을 참고하였습니다.
+> (추가적으로 참고한 글은 참고 자료 부분에 작성하였습니다.)
 
 브라우저가 페이지의 초기 출력을 위해 실행해야 하는 순서를 [Critical Rendering Path(CRP)](https://developer.mozilla.org/ko/docs/Web/Performance/Critical_rendering_path)라고 부릅니다.  
 저희는 오늘 Chrome 브라우저를 통해 이 과정에 대해 자세히 알아볼 예정입니다.
@@ -168,11 +157,10 @@ DOM 모델은 Document를 처리하는 모델에서 많이 사용됩니다.
 <br />
 HTML 파서의 첫 번째 특징은 **오류에 너그러운 속성**입니다.
 
-<Callout>
-🤔 **만약 `<p>Hello</p>` 같은 이상한 태그를 만나면 DOM 트리가 그려지지 않나요?**    
-그렇지 않습니다! DOM 트리를 만들 때의 핵심은 바로 **예외처리**입니다.    
-[HTML Standard](https://html.spec.whatwg.org/multipage/parsing.html#an-introduction-to-error-handling-and-strange-cases-in-the-parser)에 이상한 사례까지 처리가 되어 있기에 그려집니다. 다만 예외처리 방식에 따라 DOM 트리의 형태가 달라질 수 있습니다.
-
+<Callout icon={'🤔'}>
+  <strong>만약 `<p>Hello</p>` 같은 이상한 태그를 만나면 DOM 트리가 그려지지 않나요?</strong>  <br/>
+  그렇지 않습니다! DOM 트리를 만들 때의 핵심은 바로 **예외처리**입니다.    
+  [HTML Standard](https://html.spec.whatwg.org/multipage/parsing.html#an-introduction-to-error-handling-and-strange-cases-in-the-parser)에 이상한 사례까지 처리가 되어 있기에 그려집니다. 다만 예외처리 방식에 따라 DOM 트리의 형태가 달라질 수 있습니다.
 </Callout>
 
 두 번째 특징은 **파싱 과정이 중단될 수 있다는 것**입니다.
