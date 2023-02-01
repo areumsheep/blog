@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { CSSProperties, PropsWithChildren } from 'react';
 import { graphql, PageProps } from 'gatsby';
 import { MDXProvider } from '@mdx-js/react';
 
@@ -16,6 +16,34 @@ import View from 'images/View.inline.svg';
 interface Response {
   mdx: ContentType;
 }
+interface CustomComponentProps {
+  id?: string;
+  style?: CSSProperties;
+}
+
+const customComponent = {
+  h1: (props: PropsWithChildren<CustomComponentProps>) => <Typography variant="h2" {...props} />,
+  h2: (props: PropsWithChildren<CustomComponentProps>) => <Typography variant="h3" {...props} />,
+  h3: (props: PropsWithChildren<CustomComponentProps>) => <Typography variant="h4" {...props} />,
+  h4: (props: PropsWithChildren<CustomComponentProps>) => <Typography variant="h5" {...props} />,
+  p: (props: PropsWithChildren<CustomComponentProps>) => (
+    <Typography variant="body1" color="gray400" lineHeight={1.5} {...props} />
+  ),
+  em: (props: PropsWithChildren<CustomComponentProps>) => (
+    <Typography variant="body1" color="gray400" {...props} />
+  ),
+  blockquote: (props: PropsWithChildren<CustomComponentProps>) => (
+    <Callout>
+      <Callout.Description {...props} />
+    </Callout>
+  ),
+  Callout: ({ icon, children }: PropsWithChildren<{ icon: string }>) => (
+    <Callout>
+      <Callout.Icon>{icon}</Callout.Icon>
+      <Callout.Description>{children}</Callout.Description>
+    </Callout>
+  ),
+};
 
 const BlogPost = ({ data, children }: PageProps<Response>) => {
   return (
@@ -30,35 +58,7 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
             <LabeledIcon icon={<View />} label={'300명의 사람이 읽어봤어요'} />
           </Flex>
         </Flex>
-        <MDXProvider
-          components={{
-            h1: ({ children, id, style }) => (
-              <Typography variant="h2" id={id} style={style}>
-                {children}
-              </Typography>
-            ),
-            h2: ({ children, id, style }) => (
-              <Typography variant="h3" id={id} style={style}>
-                {children}
-              </Typography>
-            ),
-            h3: ({ children, id, style }) => (
-              <Typography variant="h4" id={id} style={style}>
-                {children}
-              </Typography>
-            ),
-            p: ({ children }) => (
-              <Typography variant="body1" color="gray400">
-                {children}
-              </Typography>
-            ),
-            Callout: ({ children }) => (
-              <Callout>
-                <Callout.Description>{children}</Callout.Description>
-              </Callout>
-            ),
-          }}
-        >
+        <MDXProvider components={customComponent}>
           <MdxContent>{children}</MdxContent>
         </MDXProvider>
       </Layout>

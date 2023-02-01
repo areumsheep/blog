@@ -11,6 +11,7 @@ export const Callout = styled.aside`
 
 export const Icon = styled.div`
   margin-right: 20px;
+  font-size: 25px;
 
   img {
     border-radius: 50%;
