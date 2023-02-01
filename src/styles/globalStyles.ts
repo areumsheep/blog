@@ -25,7 +25,6 @@ export const globalStyles = css`
   }
   a {
     text-decoration: none;
-    user-select: none;
     cursor: pointer;
   }
   svg {
