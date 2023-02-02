@@ -1,6 +1,5 @@
 import React from 'react';
 import type { ComponentStory } from '@storybook/react';
-import styled from '@emotion/styled';
 
 import Chip from './Chip';
 
