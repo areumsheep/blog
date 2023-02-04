@@ -9,6 +9,9 @@ const globalStyles = css`
   h5 {
     margin: 7px 0;
   }
+  span {
+    display: inline-block;
+  }
 `;
 
 const withThemeProvider = (Story, context) => {
