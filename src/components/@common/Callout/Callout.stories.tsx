@@ -1,5 +1,4 @@
 import React from 'react';
-import type { ComponentStory } from '@storybook/react';
 
 import Callout from './Callout';
 import type { CalloutArgs } from './Callout.types';
@@ -25,15 +24,13 @@ export default {
   },
 };
 
-export const Primary: ComponentStory<typeof Callout> = ({
-  iconChildren,
-  descriptionChildren,
-}: CalloutArgs) => (
+export const Primary = ({ iconChildren, descriptionChildren }: CalloutArgs) => (
   <Callout>
     {iconChildren && <Callout.Icon>{iconChildren}</Callout.Icon>}
     <Callout.Description>{descriptionChildren}</Callout.Description>
   </Callout>
 );
+
 Primary.args = {
   iconChildren: '⚠️',
   descriptionChildren:
