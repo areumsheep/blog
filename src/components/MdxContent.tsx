@@ -44,7 +44,7 @@ const MdxContent = styled.article`
     margin: 0px;
     padding-left: 20px;
 
-    li:not(:first-child) {
+    li {
       margin-top: 6px;
     }
   }
@@ -57,7 +57,6 @@ const MdxContent = styled.article`
       text-decoration: underline;
     }
   }
-
 `;
 
 export default MdxContent;
