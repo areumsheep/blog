@@ -10,7 +10,7 @@
 
 ## 👀 Preview
 
-![image](https://user-images.githubusercontent.com/48716298/216833477-d3bc8b13-8d11-4df3-8536-398c34e59166.png)
+![image](https://user-images.githubusercontent.com/48716298/216834195-8bd9e2d0-d95f-409d-b9f3-b29adc753c50.png)
 
 > 2023.01.14 ~ (개발 진행중)  
 > https://blog.areumsheep.vercel.app/
