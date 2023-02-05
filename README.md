@@ -5,8 +5,8 @@
 
 ## 🔗 Links
 
-- **Figma**: https://www.figma.com/file/54LnLgWv2AQzppj2r90CXh/%EB%B8%94%EB%A1%9C%EA%B7%B8?node-id=101%3A2&t=Yz7XURv9tpd9kzY9-1
 - **Storybook**: https://main--63dfcfdfa96b070af0a6ed62.chromatic.com/
+- **Figma**: https://www.figma.com/file/54LnLgWv2AQzppj2r90CXh/%EB%B8%94%EB%A1%9C%EA%B7%B8?node-id=101%3A2&t=Yz7XURv9tpd9kzY9-1
 
 ## 👀 Preview
 
