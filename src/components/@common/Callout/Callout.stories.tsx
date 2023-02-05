@@ -1,3 +1,4 @@
+import { Meta } from '@storybook/react';
 import React from 'react';
 
 import Callout from './Callout';
@@ -22,7 +23,7 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
 export const Primary = ({ iconChildren, descriptionChildren }: CalloutArgs) => (
   <Callout>
