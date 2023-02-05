@@ -1,4 +1,5 @@
-import React, { CSSProperties, PropsWithChildren } from 'react';
+import React from 'react';
+import type { CSSProperties, PropsWithChildren } from 'react';
 import { graphql, PageProps } from 'gatsby';
 import { MDXProvider } from '@mdx-js/react';
 
@@ -8,6 +9,8 @@ import { Typography, Callout, Flex } from 'components/@common';
 
 import type { ContentType } from 'types/content';
 import { getReadingTime } from 'utils/getReadingTime';
+import { showViews, incrementView } from 'utils/fbase';
+import { formatComma } from 'utils/format';
 
 import Calendar from 'images/Calendar.inline.svg';
 import Time from 'images/Time.inline.svg';
@@ -46,6 +49,22 @@ const customComponent = {
 };
 
 const BlogPost = ({ data, children }: PageProps<Response>) => {
+  const { id } = data.mdx;
+  const [views, setViews] = React.useState(0);
+
+  React.useEffect(() => {
+    showViews(id)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setViews(snapshot.val());
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    incrementView(id);
+  }, []);
+
   return (
     <App>
       <Layout>
@@ -55,7 +74,7 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
 
           <Flex gap={10}>
             <LabeledIcon icon={<Time />} label={`${getReadingTime(data.mdx.body)}분`} />
-            <LabeledIcon icon={<View />} label={'300명의 사람이 읽어봤어요'} />
+            <LabeledIcon icon={<View />} label={`${formatComma(views)}명의 사람이 읽어봤어요`} />
           </Flex>
         </Flex>
         <MDXProvider components={customComponent}>
@@ -69,6 +88,7 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
 export const query = graphql`
   query ($id: String) {
     mdx(id: { eq: $id }) {
+      id
       body
       frontmatter {
         title
