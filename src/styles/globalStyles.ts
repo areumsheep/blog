@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 
 export const globalStyles = css`
+  body {
+    font-family: 'Pretendard', sans-serif;
+  }
+
   body,
   h1,
   h2,
