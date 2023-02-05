@@ -10,8 +10,8 @@ import { Callout, Typography, Anchor, Chip } from 'components/@common';
 import type { ContentType } from 'types/content';
 import { getReadingTime } from 'utils/getReadingTime';
 
-import Calendar from 'images/Calendar.inline.svg';
-import Time from 'images/Time.inline.svg';
+import Calendar from 'static/images/Calendar.inline.svg';
+import Time from 'static/images/Time.inline.svg';
 
 interface Response {
   allMdx: {
@@ -28,7 +28,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
         <Wrapper>
           <Callout>
             <Callout.Icon>
-              <StaticImage src="../images/miso.jpeg" alt="미소의 세상 미소 캐릭터" />
+              <StaticImage src="../static/images/miso.jpeg" alt="미소의 세상 미소 캐릭터" />
             </Callout.Icon>
             <Callout.Description>
               <Typography variant="h3">미소</Typography>

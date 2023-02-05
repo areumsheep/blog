@@ -12,9 +12,9 @@ import { getReadingTime } from 'utils/getReadingTime';
 import { showViews, incrementView } from 'utils/fbase';
 import { formatComma } from 'utils/format';
 
-import Calendar from 'images/Calendar.inline.svg';
-import Time from 'images/Time.inline.svg';
-import View from 'images/View.inline.svg';
+import Calendar from 'static/images/Calendar.inline.svg';
+import Time from 'static/images/Time.inline.svg';
+import View from 'static/images/View.inline.svg';
 
 interface Response {
   mdx: ContentType;

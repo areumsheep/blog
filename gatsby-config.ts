@@ -21,11 +21,11 @@ const config: GatsbyConfig = {
       options: {
         name: siteMetadata.title,
         short_name: siteMetadata.title,
-        short_url: '/',
+        start_url: '/',
         background_color: '#ffffff',
         theme_color: '#F0A455',
         display: 'standalone',
-        icon: 'src/images/favicon.png',
+        icon: 'src/static/images/favicon.png',
       },
     },
     {
@@ -74,7 +74,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-hotjar`,
       options: {
-        includeInDevelopment: true, // optional parameter to include script in development
+        includeInDevelopment: true,
         id: process.env.HOTJAR_ID,
         sv: process.env.HOTJAR_VERSION,
       },
