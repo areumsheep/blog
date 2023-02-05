@@ -49,11 +49,11 @@ const customComponent = {
 };
 
 const BlogPost = ({ data, children }: PageProps<Response>) => {
-  const { id } = data.mdx;
+  const { slug } = data.mdx.frontmatter;
   const [views, setViews] = React.useState(0);
 
   React.useEffect(() => {
-    showViews(id)
+    showViews(slug)
       .then((snapshot) => {
         if (snapshot.exists()) {
           setViews(snapshot.val());
@@ -62,7 +62,7 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
       .catch((error) => {
         console.error(error);
       });
-    incrementView(id);
+    incrementView(slug);
   }, []);
 
   return (
@@ -91,6 +91,7 @@ export const query = graphql`
       id
       body
       frontmatter {
+        slug
         title
         createdAt(formatString: "YYYY년 MM월 DD일")
       }
