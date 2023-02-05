@@ -17,6 +17,10 @@ export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 680px) {
+    width: 95%;
+  }
 `;
 
 export const Nav = styled.nav`
@@ -28,4 +32,8 @@ export const Main = styled.main`
   max-width: 680px;
   margin: 0 auto;
   margin-top: 30px;
+
+  @media (max-width: 680px) {
+    width: 95%;
+  }
 `;

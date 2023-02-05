@@ -66,7 +66,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
                 <Detail>
                   <Tags>
                     {node.frontmatter.tags.map((tag) => (
-                      <Chip>{tag}</Chip>
+                      <Chip key={tag}>{tag}</Chip>
                     ))}
                   </Tags>
 
@@ -137,6 +137,10 @@ const Article = styled.article`
     background-color: ${({ theme }) => theme.color['secondary']};
     border-radius: 20px;
     transform: scale(0.98);
+  }
+
+  @media (max-width: 680px) {
+    padding: 15px 5px;
   }
 `;
 

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const MdxContent = styled.article`
-  max-width: 680px;
+  max-width: 100%;
   overflow-wrap: break-word;
 
   /* 이미지 ---------------- */
