@@ -24,6 +24,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
 
   return (
     <App>
+      <Seo />
       <Layout>
         <Wrapper>
           <Callout>
@@ -83,8 +84,6 @@ const IndexPage = ({ data }: PageProps<Response>) => {
     </App>
   );
 };
-
-export const Head: HeadFC = () => <Seo title="Miso :-)" description="미소의 개발 블로그" />;
 
 export default IndexPage;
 

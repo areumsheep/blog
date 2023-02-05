@@ -48,7 +48,7 @@ const customComponent = {
   ),
 };
 
-const BlogPost = ({ data, children }: PageProps<Response>) => {
+const BlogPost = ({ data, location: { href }, children }: PageProps<Response>) => {
   const { slug } = data.mdx.frontmatter;
   const [views, setViews] = React.useState(0);
 
@@ -67,6 +67,11 @@ const BlogPost = ({ data, children }: PageProps<Response>) => {
 
   return (
     <App>
+      <Seo
+        title={data.mdx.frontmatter.title}
+        description={data.mdx.frontmatter.description}
+        url={href}
+      />
       <Layout>
         <Typography variant="h1">{data.mdx.frontmatter.title}</Typography>
         <Flex justifyContent="space-between" style={{ marginTop: '5px' }}>
@@ -93,17 +98,11 @@ export const query = graphql`
       frontmatter {
         slug
         title
+        description
         createdAt(formatString: "YYYY년 MM월 DD일")
       }
     }
   }
 `;
-
-export const Head = () => (
-  <Seo
-    title="브라우저 동작 원리"
-    description="크롬 브라우저는 어떻게 웹사이트를 화면에 그려줄까요?"
-  />
-);
 
 export default BlogPost;
