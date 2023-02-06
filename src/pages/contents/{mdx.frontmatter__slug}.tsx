@@ -4,7 +4,7 @@ import { graphql, PageProps } from 'gatsby';
 import { MDXProvider } from '@mdx-js/react';
 
 import App from 'App';
-import { Seo, Layout, MdxContent, LabeledIcon } from 'components';
+import { Seo, Layout, MdxContent, LabeledIcon, Comment } from 'components';
 import { Typography, Callout, Flex } from 'components/@common';
 
 import type { ContentType } from 'types/content';
@@ -85,6 +85,7 @@ const BlogPost = ({ data, location: { href }, children }: PageProps<Response>) =
         <MDXProvider components={customComponent}>
           <MdxContent>{children}</MdxContent>
         </MDXProvider>
+        <Comment />
       </Layout>
     </App>
   );

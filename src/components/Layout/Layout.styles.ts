@@ -31,7 +31,7 @@ export const Nav = styled.nav`
 export const Main = styled.main`
   max-width: 680px;
   margin: 0 auto;
-  margin-top: 30px;
+  margin: 30px auto;
 
   @media (max-width: 680px) {
     width: 95%;
