@@ -244,22 +244,22 @@ CORS 요청은 단순 요청과 프리플라이트 요청+실제 요청을 하�
 
 만약 Origin을 포함해 아래와 같이 요청을 보냈다면,
 
-```
+```bash
 GET / HTTP/1.1
 Host: cors.example.com
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: en,en-US;q=0.5
-**Origin: http://www.acceptmeplease.com**
+Origin: http://www.acceptmeplease.com
 Connection: keep-alive
 ```
 
 서버에서 오는 응답은 `Access-Control-Allow-Origin` 값을 포함하여 올 것입니다.
 
-```
+```bash
 HTTP/1.1 200 OK
 Date: Sun, 24 Apr 2016 12:43:39 GMT
 Server: Apache
-**Access-Control-Allow-Origin: http://www.acceptmeplease.com**
+Access-Control-Allow-Origin: http://www.acceptmeplease.com
 Keep-Alive: timeout=2, max=100
 Connection: Keep-Alive
 Content-Type: application/xml
@@ -284,26 +284,26 @@ OPTIONS 메서드로 `Access-Control-Request-Method` 및 `Access-Control-Reque
 
 이는 추가 HTTP 헤더가 정의된 실제 요청에서 브라우저의 의도를 알려주기 때문에 중요합니다.
 
-```
-**OPTIONS** /resources/post-here/ HTTP/1.1
+```bash
+OPTIONS /resources/post-here/ HTTP/1.1
 Host: cors.example.com
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: en-us,en;q=0.5
 Connection: keep-alive
-**Origin: http://www.acceptmeplase.com
+Origin: http://www.acceptmeplase.com
 Access-Control-Request-Method: POST
-Access-Control-Request-Headers: X-TOKEN-ID**
+Access-Control-Request-Headers: X-TOKEN-ID
 ```
 
 OPTIONS 요청을 수락하면 다음과 같이 응답합니다.
 
-```
-HTTP/1.1 **200 OK** Date: Mon, 01 Dec 2008 01:15:39 GMT
+```bash
+HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 01:15:39 GMT
 Server: Apache
-**Access-Control-Allow-Origin: http://www.acceptmeplease.com
+Access-Control-Allow-Origin: http://www.acceptmeplease.com
 Access-Control-Allow-Methods: POST, GET, OPTIONS
 Access-Control-Allow-Headers: X-TOKEN-ID
-Access-Control-Max-Age: 86400**
+Access-Control-Max-Age: 86400
 Vary: Accept-Encoding, Origin
 Content-Length: 0
 Keep-Alive: timeout=2, max=100
@@ -324,14 +324,14 @@ Content-Type: text/plain
 이제 실제 요청이 진행됩니다.   
 프리플라이트 요청으로 인해 Content-Type HTTP 헤더와 X-Token-ID HTTP 헤더가 변경될 수 있습니다.
 
-```
+```bash
 POST /resources/post-here/ HTTP/1.1
 Host: cors.example.com
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: en-us,en;q=0.5
 Connection: keep-alive
-**X-Token-ID: aabbccddeeff0011223344556677889900
-Content-Type: application/xml; charset=UTF-8**
+X-Token-ID: aabbccddeeff0011223344556677889900
+Content-Type: application/xml; charset=UTF-8
 Content-Length: 55
 Origin: http://www.acceptmeplease.com
 Pragma: no-cache

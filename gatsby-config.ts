@@ -54,13 +54,13 @@ const config: GatsbyConfig = {
               filename: ({ hash, name, extension }) => `${name}-${hash}.${extension}`,
             },
           },
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              noInlineHighlight: false,
+            },
+          },
         ],
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-google-gtag',
-      options: {
-        trackingIds: [process.env.GOOGLE_ANALYTICS_ID],
       },
     },
     {
@@ -69,6 +69,12 @@ const config: GatsbyConfig = {
         rule: {
           include: /\.inline\.svg$/,
         },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-gtag',
+      options: {
+        trackingIds: [process.env.GOOGLE_ANALYTICS_ID],
       },
     },
     {
