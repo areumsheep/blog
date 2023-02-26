@@ -32,6 +32,7 @@ export const globalStyles = css`
   a {
     text-decoration: none;
     cursor: pointer;
+    width: 100%;
   }
   svg {
     margin-right: 3px;
