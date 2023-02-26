@@ -57,6 +57,10 @@ const MdxContent = styled.article`
       text-decoration: underline;
     }
   }
+
+  aside {
+    padding: 20px;
+  }
 `;
 
 export default MdxContent;
