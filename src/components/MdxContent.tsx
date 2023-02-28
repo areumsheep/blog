@@ -7,6 +7,7 @@ const MdxContent = styled.article`
   /* 이미지 ---------------- */
   img {
     width: 100%;
+    margin: 10px 0;
   }
 
   /* 타이틀 ---------------- */
