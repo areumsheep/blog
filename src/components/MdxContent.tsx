@@ -61,6 +61,10 @@ const MdxContent = styled.article`
   aside {
     padding: 20px;
   }
+
+  hr {
+    margin: 30px 0;
+  }
 `;
 
 export default MdxContent;
