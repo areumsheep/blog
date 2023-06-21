@@ -1,0 +1,354 @@
+---
+slug: 'what-changes-in-typescript-5-1'
+title: '🌿 TypeScript 5.1에서 변경된 점은 무엇일까요?'
+description: '리액트 서버 컴포넌트를 위한 타입스크립트의 변화를 알아봅시다!'
+tags: ['TypeScript']
+createdAt: '2023-06-19 23:59:40'
+updatedAt: ''
+---
+
+> [https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-1.html](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-1.html)  
+> 추천하는 부분은 `✨` 문자가 있는 곳을 참고해보세요!
+
+## 📝 TL;DR (3줄 요약)
+
+개인적으로 TypeScript 5.1에서 가장 중요하게 생각하는 3가지는 아래와 같습니다.
+
+- React Server Component의 비동기 컴포넌트를 위하여 `JSX.ElementType` 추가
+- 반환문이 없는 함수에서 return 타입 `undefined` 작성 가능
+- TypeScript 5.1에서 ES2020을 지원함으로써 Node.js의 최소 버전 변경
+
+## ✨JSX Element와 JSX 태그 타입 별도 구분 (React Server Components의 한계점 수정)
+
+개인적으로 생각하기에 5.1이 생겨난 가장 큰 이유가 아닐까 싶습니다. 현재의 React Server Component는 타입스크립트에선 작동하지 않습니다.
+
+<br />그 이유는 React Server Component에서 `async` 컴포넌트 (비동기 컴포넌트)를 도입했기 때문입니다.
+
+```tsx
+const MyAsyncComponent = async () => {
+  return <div></div>;
+};
+
+const Parent = () => {
+  //  ~~~~~~
+  // 'MyAsyncComponent'는 JSX 구성 요소로 사용할 수 없습니다.
+  // 반환 타입 'Promise<Element>'는 유효한 JSX 요소가 아닙니다.
+  return <MyAsyncComponent />;
+};
+```
+
+5.1 버전 이전에는 비동기 컴포넌트에 대해 하드코딩된 타입을 사용해야 했습니다.
+
+> 현재는 사라졌으나 Next.js 13 버전에서 임시방편을 알려주기도 하였습니다. <br />
+> 출처: [https://curryyou.tistory.com/529](https://curryyou.tistory.com/529) > ![](https://velog.velcdn.com/images/reum107/post/07d0676e-7f5f-4f51-919d-da5c22d040f6/image.png)
+
+[React에선 `Promise` 타입을 반환할 수 있는 기능을 제안](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md)했지만 해당 문제로 인해 표현할 수 없었습니다.  
+또, React에서 유효한 코드인 `string`을 반환하는 것도 정상적으로 작동되지 않았습니다.
+
+```tsx
+const MyStringComponent = () => {
+  return 'Hello world!';
+};
+const Parent = () => {
+  // 'MyStringComponent'는 JSX 구성 요소로 사용할 수 없습니다.
+  // 반환 타입 'string'는 유효한 JSX 요소가 아닙니다.
+  return <MyStringComponent />;
+};
+```
+
+이제 TypeScript는 `JSX Element` 가 유효한지 계산하기 위해 `JSX.ElementType` 이라는 전역 타입을 참조합니다.
+
+```tsx
+namespace JSX {
+    export type ElementType =
+        // All the valid lowercase tags
+        keyof IntrinsicAttributes
+        // Function components
+        (props: any) => Element
+        // Class components
+        new (props: any) => ElementClass;
+    export interface IntrinsictAttributes extends /*...*/ {}
+    export type Element = /*...*/;
+    export type ClassElement = /*...*/;
+}
+```
+
+이는 JSX를 사용하는 프레임워크 (ex: React, Solid, Qwik)에 유효한 `JSX Element` 를 구성하는 항목에 대해 훨씬 더 많은 제어 권한을 부여하며 JSX 자체를 사용하는 새로운 API의 가능성을 열어줍니다.
+
+## ✨반환문이 없는 함수에 `undefined` 타입 사용 가능
+
+원래 자바스크립트에선 `return` 없이 함수를 끝내는 경우 `undefined` 를 리턴합니다.
+
+```jsx
+function foo() {
+  // 리턴 없음!
+}
+// x = undefined
+let x = foo();
+```
+
+그러나 이전 버전의 타입스크립트에선 반환문이 전혀 없을 수 있는 유일한 함수는 `void` 와 `any` 타입의 함수였습니다. 즉, 함수가 `undefined` 를 반환한다고 명시적으로 작성하여도 최소한 하나의 return 문이 존재해야 했습니다.
+
+```tsx
+// ✅ OK - f1은 void를 반환한다고 추론합니다.
+function f1() {
+  // no returns
+}
+// ✅ OK - 'void'는 return 문이 필요없습니다.
+function f2(): void {
+  // no returns
+}
+// ✅ OK - 'any'는 return 문이 필요없습니다.
+function f3(): any {
+  // no returns
+}
+
+// ❌ Error!
+// 선언된 유형이 'void'도 'any'도 아닌 함수는 값을 반환해야 합니다.
+function f4(): undefined {
+  // no returns
+}
+```
+
+하지만, 일부 API에서 `undefined` 를 반환한다고 예상하는 함수는 문제가 생길 수 있습니다.  
+이것을 해결하기 위해선 `undefined` 를 명시적으로 반환하거나, return문과 반환 타입 명시를 해야 합니다.
+
+```tsx
+declare function takesFunction(f: () => undefined): undefined;
+// ❌ Error!
+// '() => void' 유형의 인수는 '() => undefined' 유형의 매개변수에 할당할 수 없습니다.
+takesFunction(() => {
+  // no returns
+});
+// ❌ Error!
+// 선언된 유형이 'void'도 'any'도 아닌 함수는 값을 반환해야 합니다.
+takesFunction((): undefined => {
+  // no returns
+});
+// ❌ Error!
+// '() => void' 유형의 인수는 '() => undefined' 유형의 매개변수에 할당할 수 없습니다.
+takesFunction(() => {
+  return;
+});
+
+// ✅ OK
+takesFunction(() => {
+  return undefined;
+});
+// ✅ OK
+takesFunction((): undefined => {
+  return;
+});
+```
+
+이 오류는 특히 제어할 수 없는 함수를 호출할 때 아쉬움이 많았습니다.
+
+`undefined` 에 대하여 `void` 로 추론되거나 `undefined` 반환 함수에 `return` 문이 필요한지 여부는 코드를 이해하는 것에 어려움을 주는 것 같습니다.
+
+<br />이 상황을 고려하여 타입스크립트 5.1은 <b>이렇게 변화</b>하였습니다.
+
+<br />
+
+첫째, 타입스크립트 5.1은 이제 `undefined` 함수에 대해 반환문이 없는 것을 허용합니다.
+
+```tsx
+// ✅ TypeScript 5.1에선 정상적으로 작동합니다.
+function f4(): undefined {
+  // 리턴 없음
+}
+// ✅ TypeScript 5.1에선 정상적으로 작동합니다.
+takesFunction((): undefined => {
+  // 리턴 없음
+});
+```
+
+둘째, 함수에 반환문이 없고 정의되지 않는 것을 반환하는 함수는 `undefined` 타입으로 타입 추론이 됩니다.
+
+```tsx
+// ✅ TypeScript 5.1에선 정상적으로 작동합니다.
+takesFunction(function f() {
+  //                 ^ 리턴 타입은 undefined
+  // 리턴 없음
+});
+// ✅ TypeScript 5.1에선 정상적으로 작동합니다.
+takesFunction(function f() {
+  //                 ^ 리턴 타입은 undefined
+  return;
+});
+```
+
+### 사실 수정되지 않아도 되는 건 아닌가요?
+
+`void` 는 처리하기 까다로우며 [타입에 오류가 있어도 작동이 되는 문제](https://github.com/microsoft/TypeScript/issues/36239)를 가지고 있습니다.
+슬쩍 힌트를 남기자면, 타입스크립트에서 `void` 타입을 사용하더라도 값을 return 할 수 있다는 것입니다.
+
+<br />
+
+<Callout icon={'🤔'}>
+  자세하게 알고싶으신 분은 [왜 TypeScript는 void 타입을 사용해도 값을 return 할 수 있을까? -
+  Pozafly](https://pozafly.github.io/typescript/why-can-typescript-return-any-value-using-void/)
+  글을 참고해보세요!
+</Callout>
+
+## Getter, Setter에 값과 상관없는 타입 사용 가능
+
+TypeScript 4.3에서는 get, set 접근자 쌍이 서로 다른 두 가지 타입을 지정할 수 있게 되었습니다.
+
+```tsx
+interface Serializer {
+  set value(v: string | number | boolean);
+  get value(): string;
+}
+declare let box: Serializer;
+// 'boolean'도 허용되어 있기에 값을 넣을 수 있습니다.
+box.value = true;
+// 여기에선 'string'으로 나옵니다.
+console.log(box.value.toUpperCase());
+```
+
+위 코드에서 보이듯이 지금까지는 `get` 타입이 `set` 타입의 하위 타입이여야 했습니다.
+하지만, **getter와 setter가 완전히 관계없는 타입인 API**가 있습니다.
+
+<br />
+예를 들어, 가장 일반적인 예시 [CSSStyleRule API](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleRule)가
+있습니다.
+
+![](https://velog.velcdn.com/images/reum107/post/bb0d144c-3423-460f-9343-5668d00bdf52/image.png)
+
+style setter는 문자열 타입을 받아 객체로 변환한 후 Element에 할당하고, style getter는 [CSSStyleDeclaration](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration) 객체를
+반환합니다.
+
+<br />
+
+하지만 이전의 타입스크립트에선 getter, setter가 관련없는 타입을 정할 수 없었기에 아래와 같이 코드를 작성하면 에러가 발생할 것입니다.
+
+```tsx
+declare const el: HTMLDivElement;
+
+// Before 5.1: Cannot assign to 'style' because it is a read-only property.ts
+// style 속성의 쓰기 타입을 별도 지정이 불가능하여, readonly 타입으로 되어있음.
+el.style = 'color: red;';
+```
+
+하지만 이제 규칙이 완화되어 완전히 다른 타입의 getter와 setter를 사용할 수 있습니다.  
+아직 내장 인터페이스 타입이 수정되진 않았지만 수정이 된다면 이런 식의 코드도 가능합니다.
+
+```tsx
+declare const el: HTMLDivElement;
+
+// After 5.1: 위 CSSStyleRule의 구현대로 허용됨.
+el.style = 'background: red;';
+```
+
+## JSX 속성에 네임스페이스 이용 가능
+
+타입스크립트는 이제 JSX를 사용할 때 네임스페이스 속성 이름을 지원합니다.
+
+<br />
+JSX에서 HTML이 아닌 XML에서 나온 네임스페이스 속성을 지원하는 것이 놀랍게 느껴지실 수 있습니다. <br />
+다만 흥미로운 점은 **JSX가 HTML을 생성하는 데에 사용되지만 XML에서 영감을 받았다**는 점입니다.
+<br />
+그렇기에 JSX 사양이 네임스페이스 어트리뷰트를 허용하게 되었습니다. <br />
+하지만 지금까지 타입스크립트에는 이에 대한 정의가 존재하지 않았습니다.
+<br />
+네임스페이스 태그 이름은 이름의 첫 번째 세그먼트가 소문자 이름일 때 `JSX.IntrinsicAttributes` 와 유사한
+방식으로 조회됩니다.
+
+```tsx
+// 일부 라이브러리나 해당 라이브러리의 확장에서 이렇게 선언하면
+namespace JSX {
+  interface IntrinsicElements {
+    ['a:b']: { prop: string };
+  }
+}
+// 코드에서 이렇게 사용할 수 있습니다.
+let x = <a:b prop="hello!" />;
+```
+
+네임스페이스 속성은 상위-하위 속성 그룹과 속성 이름 충돌을 방지하는 데에 유용하게 사용될 수 있습니다.
+
+## ✨ES2020 최소 런타임 변경
+
+타입스크립트 5.1은 ECMAScript 2020에 도입된 자바스크립트 기능을 제공합니다.
+
+<br />
+따라서 타입스크립트는 상당히 높은 버전의 런타임에서 실행되어야 합니다. 이제는 Node.js 14.17 버전 이상에서만
+실행됨을 의미합니다.
+<br />
+Node 10이나 12 같은 버전의 Node.js에서 타입스크립트 5.1을 실행하려고 하면 `tsc.js` 또는 `tsserver.js`
+에서 다음과 같은 오류가 표시될 수 있습니다.
+
+```bash
+node_modules/typescript/lib/tsserver.js:2406
+  for (let i = startIndex ?? 0; i < array.length; i++) {
+                           ^
+
+SyntaxError: Unexpected token '?'
+    at wrapSafe (internal/modules/cjs/loader.js:915:16)
+    at Module._compile (internal/modules/cjs/loader.js:963:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1027:10)
+    at Module.load (internal/modules/cjs/loader.js:863:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:708:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:60:12)
+    at internal/main/run_main_module.js:17:47
+```
+
+또 타입스크립트를 설치하려고 하면 npm에서 다음과 같은 오류 메세지로 표시됩니다.
+
+```bash
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'typescript@5.1.1-rc',
+npm WARN EBADENGINE   required: { node: '>=14.17' },
+npm WARN EBADENGINE   current: { node: 'v12.22.12', npm: '8.19.2' }
+npm WARN EBADENGINE }
+```
+
+Yarn에서는 이렇게 표시됩니다.
+
+```bash
+error typescript@5.1.1-rc: The engine "node" is incompatible with this module. Expected version ">=14.17". Got "12.22.12"
+error Found incompatible module.
+```
+
+## 최적화 작업
+
+### 더 빠른 리터럴 타입
+
+리터럴 타입은 복잡하고 리소스를 많이 사용하는 구조로 되어있었습니다.
+
+![](https://velog.velcdn.com/images/reum107/post/e2bd9922-8e9c-481b-9769-5b96d826d6a3/image.png)
+
+위와 같이 타입을 작성하면 타입 검사에 약 50초가 걸렸으나 **현재는 변경되어 0.4초로 단축**되었습니다.
+
+## 다른 변경점도 알고싶어요! 🤓
+
+### `@param` 태그 자동완성 지원
+
+타입스크립트는 이제 타입스크립트, 자바스크립트 파일 모두에서 `@param` 태그를 입력할 때 코드 자동완성을 제공합니다. 이렇게 하면 코드를 문서화하거나 자바스크립트에서 JSDoc 타입을 추가할 때 일부 타이핑 및 텍스트 이동을 줄이는 데 도움이 될 수 있습니다.
+
+<br />
+단순한 자동완성이지만 이미 JSDoc에 정의되어 있는 파라미터 목록을 기반으로 힌트를 줄여주기에 좋습니다.
+
+![](https://velog.velcdn.com/images/reum107/post/ee9ddd04-f057-4c4b-b184-f6dead310339/image.gif)
+
+### `typeRoots` 를 이용하여 적용된 패키지 확인
+
+타입스크립트에서 지정된 모듈 조회 전략을 사용하여 경로를 확인할 수 없는 경우 이제는 지정된 `typeRoots` 의 상대적인 패키지를 확인합니다.
+
+### 선언된 타입을 기존 파일에 적용시킬 수 있는 VSCode 기능 제공
+
+`export` 구문을 새 파일로 이동하는 것 외에도 타입스크립트는 선언 구문을 기존 파일로 이동하기 위한 미리보기 기능을 제공합니다.
+
+<br />
+최신 버전의 VSCode에서 이 기능을 사용할 수 있습니다.
+
+![](https://velog.velcdn.com/images/reum107/post/e0196a25-489e-4b70-86c2-a1e5c744ae0e/image.gif)
+
+## 참고자료
+
+- [https://www.totaltypescript.com/typescript-5-1-beta-breakdown](https://www.totaltypescript.com/typescript-5-1-beta-breakdown)
+- [https://tomaszs2.medium.com/typescript-5-1-beta-is-relaxed-friendly-and-fast-9dd0e95e5e68](https://tomaszs2.medium.com/typescript-5-1-beta-is-relaxed-friendly-and-fast-9dd0e95e5e68)
+- [https://opnay.com/p/fe0fd843-eed0-4f39-a0b0-796eb542290d](https://opnay.com/p/fe0fd843-eed0-4f39-a0b0-796eb542290d)
+- [https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md)
+- [https://itchallenger.tistory.com/760](https://itchallenger.tistory.com/760)
+- [https://vived.io/new-hook-is-coming-to-react-frontend-weekly-vol-109/](https://vived.io/new-hook-is-coming-to-react-frontend-weekly-vol-109/)
