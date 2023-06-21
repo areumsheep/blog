@@ -40,6 +40,9 @@ const IndexPage = ({ data }: PageProps<Response>) => {
                 <Anchor href="https://github.com/areumsheep" variant="body2" color="gray400">
                   Github
                 </Anchor>
+                <Anchor href="https://velog.io/@reum107" variant="body2" color="gray400">
+                  Velog
+                </Anchor>
                 <Anchor
                   href="https://www.linkedin.com/in/%EC%95%84%EB%A6%84-%EC%96%91-74b140236/"
                   variant="body2"
