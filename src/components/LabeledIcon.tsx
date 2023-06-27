@@ -8,7 +8,7 @@ interface Props extends IconProps {
 
 const LabeledIcon = ({ icon, variant = 'circular', label }: Props) => {
   return (
-    <Flex alignItems="flex-start">
+    <Flex alignItems="center">
       <Icon icon={icon} variant={variant} />
       <Typography variant="body2" color="livid300">
         {label}
