@@ -44,7 +44,7 @@ const IndexPage = ({ data }: PageProps<Response>) => {
                   Velog
                 </Anchor>
                 <Anchor
-                  href="https://www.linkedin.com/in/%EC%95%84%EB%A6%84-%EC%96%91-74b140236/"
+                  href="https://www.linkedin.com/in/areumsheep/"
                   variant="body2"
                   color="gray400"
                 >
